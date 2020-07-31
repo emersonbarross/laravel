@@ -46,11 +46,11 @@ class ClienteControlador extends Controller
     {
         $clientes = session('clientes');
         $id = count($clientes) +1;
-        $nome = $request['nome'];
+        $nome = $request->nome;
         $dados = ["id"=>$id, "nome"=>$nome];
         $clientes[] = $dados;
         session(['clientes' => $clientes]);
-        return redirect()->route('cliente.index');
+        return redirect()->route('clientes.index');
 
         //dd($dados); //'DD' a princio é pra debugar e mostrar na tela os dados, similar ao vardump().
     }
