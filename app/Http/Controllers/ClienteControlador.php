@@ -75,7 +75,9 @@ class ClienteControlador extends Controller
      */
     public function edit($id)
     {
-        //
+        $clientes = session('clientes');
+        $cliente = $clientes [$id -1];
+        return view('clientes.edit', compact(['cliente']));
     }
 
     /**
@@ -87,7 +89,10 @@ class ClienteControlador extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $clientes = session('clientes');
+        $clientes [$id -1]['nome'] = $request['nome'];
+        session(['clientes' => $clientes]);
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -98,6 +103,10 @@ class ClienteControlador extends Controller
      */
     public function destroy($id)
     {
-        //
+        $clientes = session('clientes');
+        $ids = array_column($clientes, 'id'); // O 'array_column' filtra na variavel passada os dados de array passados no segundo parametro.
+        $index = array_search($id, $ids); // O 'array_search' procura dentro da variavel o array passado no primeiro parametro.
+        array_splice($clientes, $index, 1); // O array_splice' apaga dentro da variavel passada no primeiro parametro a variavel do segundo em quantidade passada no terceiro parametro.
+        return redirect() ->route('cliente.index');
     }
 }
