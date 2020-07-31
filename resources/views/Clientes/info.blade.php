@@ -4,4 +4,4 @@
 <p> NOME: {{$cliente['nome']}} </p>
 <br>
 
-<a href="{{route('clientes.index')}}"<Voltar</a>
+<a href="{{route('cliente.index')}}">Voltar</a>
