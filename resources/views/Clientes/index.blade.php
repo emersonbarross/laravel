@@ -1,5 +1,5 @@
 <h1>Clientes:</h1>
-<a href='{{route('cliente.create')}}'>Cadastrar Novo Cliente</a>
+<a href="{{route('cliente.create')}}">Cadastrar Novo Cliente</a>
 <ol>
     @foreach ($clientes as $c)
     <li>  {{$c['nome']}} |

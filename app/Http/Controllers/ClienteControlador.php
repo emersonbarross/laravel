@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 class ClienteControlador extends Controller
 {   
-    private $clientes = [
+    private $clientes = array(
         ['id'=>1, 'nome'=>'Ademir'],
         ['id'=>2, 'nome'=>'Joao'],
         ['id'=>3, 'nome'=>'Maria'],
         ['id'=>4, 'nome'=>'Aline']
-    ];
+    );
 
     public function __construct()
     {
@@ -35,7 +35,7 @@ class ClienteControlador extends Controller
      */
     public function create()
     {
-        return view("Clientes.create");
+        return view("clientes.create");
     }
 
     /**
@@ -46,7 +46,7 @@ class ClienteControlador extends Controller
     {
         $clientes = session('clientes');
         $id = count($clientes) +1;
-        $nome = $request->nome;
+        $nome = $request['nome'];
         $dados = ["id"=>$id, "nome"=>$nome];
         $clientes[] = $dados;
         session(['clientes' => $clientes]);
@@ -63,7 +63,7 @@ class ClienteControlador extends Controller
     {
         $clientes = session('clientes');
         $cliente = $clientes [$id -1];
-        return view("clientes.info");
+        return view('clientes.info', compact(['cliente']));
 
     }
 
