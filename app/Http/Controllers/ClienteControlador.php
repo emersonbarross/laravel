@@ -6,18 +6,18 @@ use Illuminate\Http\Request;
 
 class ClienteControlador extends Controller
 {   
-    private $clientes = array(
+    private $clientes = [
         ['id'=>1, 'nome'=>'Ademir'],
         ['id'=>2, 'nome'=>'Joao'],
         ['id'=>3, 'nome'=>'Maria'],
         ['id'=>4, 'nome'=>'Aline']
-    );
+    ];
 
     public function __construct()
     {
         $clientes = session('clientes');
         if(!isset($clientes))
-            session(['clientes' =>$this->clientes]);
+            session(['clientes' => $this->clientes]);
     }
     /**
      * @return \Illuminate\Http\Response
@@ -45,11 +45,11 @@ class ClienteControlador extends Controller
     public function store(Request $request) // 'Request' pega tudo que foi passado via post para a function
     {
         $clientes = session('clientes');
-        $id= count($clientes) +1;
-        $nome = $request['nome'];
-        $dados = ['id'=>$id, 'nome'=>$nome];
+        $id = count($clientes) +1;
+        $nome = $request->nome;
+        $dados = ["id"=>$id, "nome"=>$nome];
         $clientes[] = $dados;
-        session(['clientes'=>$clientes]);
+        session(['clientes' => $clientes]);
         return redirect()->route('cliente.index');
 
         //dd($dados); //'DD' a princio é pra debugar e mostrar na tela os dados, similar ao vardump().
@@ -61,7 +61,10 @@ class ClienteControlador extends Controller
      */
     public function show($id)
     {
-        //
+        $clientes = session('clientes');
+        $cliente = $clientes [$id -1];
+        return view("clientes.info");
+
     }
 
     /**
